@@ -1,6 +1,6 @@
 const { User, Book } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
-const { signToken } = require("../utils/auth");
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
@@ -31,7 +31,7 @@ const resolvers = {
 
         books: async (parent, { username }) => {
             const params = username ? { username } : {};
-            return Book.find(params).sort({ title});
+            return Book.find(params).sort({ title });
         },
 
         book: async (parent, { _id }) => {
@@ -81,4 +81,6 @@ const resolvers = {
         // }
 
     }
-}
+};
+
+module.exports = resolvers;
