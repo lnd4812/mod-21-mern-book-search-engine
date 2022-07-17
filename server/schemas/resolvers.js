@@ -15,32 +15,32 @@ const resolvers = {
 
             throw new AuthenticationError("Not logged in");
         },
-
         users: async () => {
             return User.find()
                 .select('-_v, -password')
                 .populate("books");
         },
-
         users: async (parent, { username }) => {
             return User.findOne({ username })
-            .select('-_v -password')
-            .populate("books");
+                .select('-_v -password')
+                .populate("books");
         },
-
-
         books: async (parent, { username }) => {
             const params = username ? { username } : {};
             return Book.find(params).sort({ title });
         },
-
         book: async (parent, { _id }) => {
             return Book.findOne({ _id });
         }
     },
 
     Mutation: {
-        login: async (parent, {email, password} ) => {
+        addUser: async (parent, args) => {
+            const user = await User.create({ args });
+            const token = signToken(user);
+            return { token, user };
+        },
+        login: async (parent, { email, password } ) => {
             const user = await User.findOne({ email });
 
             if (!user) {
@@ -55,12 +55,6 @@ const resolvers = {
 
             const token = signToken(user);
             return { token, user };
-        },        
-        addUser: async (parent, args) => {
-            const user = await User.create(args);
-            const token = signToken(user);
-
-            return { token, user };
         },
         saveBook: async(parent, args, context) => {
             if (context.user) {
@@ -68,18 +62,25 @@ const resolvers = {
         
                 await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    { $push: { books: book._id }},
+                    { $addToSet: { savedBooks: book._id }},
                     { new: true }
                 );
                 return book;
             } 
-            throw new AuthenticationError("You may not be logged in!");
+            throw new AuthenticationError("Please log in");
+        },
+        removeBook: async(parent, { bookId }, context) => {
+            if (context.user) {
+                const book = await Book.delete({ ...args, username: context.user.username });
+
+                return User.findByIdAndUpdate(
+                    { id: context.user._id},
+                    { $pull: { savedBooks: context.book._id }},
+                    { new: true }
+                );
+            }
+            throw new AuthenticationError("Please log in.");
         }
-
-        // saveBook: async(parent ) => {
-            
-        // }
-
     }
 };
 
