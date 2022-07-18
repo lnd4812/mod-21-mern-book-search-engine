@@ -15,23 +15,13 @@ const resolvers = {
 
             throw new AuthenticationError("Not logged in");
         },
-        users: async () => {
-            return User.find()
-                .select('-_v, -password')
-                .populate("books");
-        },
-        users: async (parent, { username }) => {
-            return User.findOne({ username })
-                .select('-_v -password')
-                .populate("books");
-        },
-        books: async (parent, { username }) => {
-            const params = username ? { username } : {};
-            return Book.find(params).sort({ title });
-        },
-        book: async (parent, { _id }) => {
-            return Book.findOne({ _id });
-        }
+        // books: async (parent, { username }) => {
+        //     const params = username ? { username } : {};
+        //     return Book.find(params);
+        // },
+        // book: async (parent, { _id }) => {
+        //     return Book.findOne({ _id });
+        // }
     },
 
     Mutation: {
@@ -56,26 +46,22 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        saveBook: async(parent, args, context) => {
+        saveBook: async(parent,{ bookInput }, context) => {
             if (context.user) {
-                const book = await Book.create({ ...args, username: context.user.username });
-        
-                await User.findByIdAndUpdate(
+              
+                return User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    { $addToSet: { savedBooks: book._id }},
+                    { $addToSet: { savedBooks: bookInput }},
                     { new: true }
                 );
-                return book;
-            } 
+                            } 
             throw new AuthenticationError("Please log in");
         },
         removeBook: async(parent, { bookId }, context) => {
             if (context.user) {
-                const book = await Book.delete({ ...args, username: context.user.username });
-
                 return User.findByIdAndUpdate(
                     { id: context.user._id},
-                    { $pull: { savedBooks: context.book._id }},
+                    { $pull: { savedBooks: context.bookId }},
                     { new: true }
                 );
             }
