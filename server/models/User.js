@@ -1,5 +1,8 @@
-const { Schema, model, Types } = require('mongoose');
+const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+
+// import subdocument bookSchema to populate savedBooks array
+const bookSchema = require('./Book');
 
 const userSchema = new Schema(
   {
@@ -20,12 +23,7 @@ const userSchema = new Schema(
       required: true,
     },
     // set savedBooks to be an array of data that adheres to the bookSchema
-    savedBooks: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Book"
-      }
-    ]
+    savedBooks: [bookSchema]
   },
   // set this to use virtual below
   {
