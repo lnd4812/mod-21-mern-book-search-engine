@@ -26,10 +26,12 @@ const resolvers = {
 
     Mutation: {
         addUser: async (parent, args) => {
-            await console.log('checking validation');
+            await console.log('checking if this is working properly');
             console.log(args);
-            const user = await User.create({ args });
+            
+            const user = await User.create(args);
             const token = signToken(user);
+            
             return { token, user };
         },
         login: async (parent, { email, password } ) => {
@@ -59,7 +61,7 @@ const resolvers = {
                             } 
             throw new AuthenticationError("Please log in");
         },
-        removeBook: async(parent, { bookId }, context) => {
+        removeBook: async(parent, bookId, context) => {
             if (context.user) {
                 return User.findByIdAndUpdate(
                     { id: context.user._id},
