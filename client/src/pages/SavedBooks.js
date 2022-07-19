@@ -21,9 +21,9 @@ const SavedBooks = () => {
     setUserData(user);
 
    
-  // create function that accepts the book's mongo _id value as param and deletes the book from the database
+    // create function that accepts the book's mongo _id value as param and deletes the book from the database
    const removeBook  = useMutation(REMOVE_BOOK, {
-    update(cache, { data: { removeBook }}) {
+    update(cache, { data: {removeBook}} ) {
       try {
         const { me } = cache.readQuery({ query: GET_ME });
         cache.writeQuery({
