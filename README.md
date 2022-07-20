@@ -5,7 +5,7 @@
 
 ## Description
 
-A S
+The purpose of this application is to refactor a fully functioning Google Books API search engine from a RESTful API to a GraphQL API built with Apollo Server, using MongoDB database, Node.js/Express.js server on the back-end, a React front end (MERN) and API.  
 
 Output is based on the acceptance criteria outlined in the Module 20 Assignment Overview [Module-21-assignment](https://courses.bootcampspot.com/courses/1181/assignments/23393?module_item_id=467017).
 
@@ -24,15 +24,18 @@ A sample display of expected output is included in the Challenge outline.
 
 ## Installation
 
-Apollo server installation.
+* Set up Apollo Server to use GraphQL queries and mutuations to fetch and modify data
+* Modify existing Middleware to function with GraphQL API
+* Create an Apollo Provider to enable requests to communicate with an Apollo Server
+* Deploy application to Heroku
 
 The React App is initiated by running "npm create-react-app"in the CLI and, once the sufficient coding has been added, may be deployed by typing "npm run start" in the CLI.  A webpage is then launched at "localhost:3000".
 
 ## Usage
 
-This application e
+This application is meant to serve as a book search engine for a Google Books API. A user can enter the name of a book in the input field to conduct a search.  Results include the book's title, author, description, image and link to that book on the Google Books site.  However, the user must be logged in to save a book or delete a book.  The application features a modal giving a user the option to login; if not yet signed up, the user may click on the signup tab in order to create and account.
 
-* About
+Once logged in, menu options available to the user now include options to visit that user's saved books in addition to being able to save or delete a book. The login/signup menu option changes to logout.
 
 ## License
 
@@ -44,11 +47,11 @@ Please visit [Contributor Covenant website](https://contributor-covenant.org) fo
 
 ## Testing
 
-Apollo explorer sandbox [Apollo GraphQL](https://studio.apollographql.com/sandbox/explorer) although the continuous rendering of React as changes are made to the code does enable the development to measure the impact of each change in the code.
+Apollo explorer sandbox [Apollo GraphQL](https://studio.apollographql.com/sandbox/explorer) was used to test the back-end, while the continuous rendering of React as changes are made to the code does enables the developer to measure the impact of each change in the code (unless there is an uncaught reference error where process is not defined due to some iframe element)
 
 ## Credits
 
-Assistance was provided in my weekly tutoring session, one of the Learning Assistants via AskBCS and the usual visits to the Stack Overflow website [https://stackoverflow.com](https://stackoverflow.com).
+Assistance was provided in my weekly tutoring session, askBCS and the usual visits to the Stack Overflow website [https://stackoverflow.com](https://stackoverflow.com), GitHub, React.JS examples and several miscellaneous Google searches.
 
 ## Questions?
 

@@ -37,10 +37,9 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        saveBook: async(parent,{ user, bookData }, context) => {
-            console.log(user);
+        saveBook: async(parent,{ bookData }, context) => {
             if (context.user) {
-                const updatedUser = await User.findByIdAndUpdate(
+                const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
                     { $addToSet: { savedBooks: bookData }},
                     { new: true }
@@ -49,11 +48,11 @@ const resolvers = {
             } 
             throw new AuthenticationError("Please log in");
         },
-        removeBook: async(parent, bookId, context) => {
+        removeBook: async(parent,{bookId}, context) => {
             if (context.user) {
-               const updatedUser = await User.findByIdAndUpdate(
+               const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id},
-                    { $pull: { savedBooks: {bookData: context.bookId }}},
+                    { $pull: { savedBooks: {bookId: bookId }}},
                     { new: true }
                 );
                 return updatedUser;

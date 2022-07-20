@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server/server.js",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "pre-install": "npx npm-force-resolutions",
     "install": "cd server && npm i && cd ../client && npm i",
     "build": "cd client && npm run build"
   },
@@ -13,10 +14,14 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^5.3.0"
+    "concurrently": "^5.3.0",
+    "react-error-overlay": "6.0.9"
   },
   "dependencies": {
     "apollo-server-express": "^3.10.0",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1" 
+  },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
   }
 }
