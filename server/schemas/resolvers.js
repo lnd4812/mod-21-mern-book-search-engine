@@ -9,19 +9,10 @@ const resolvers = {
                 const userData = await User.findOne({ _id: context.user._id })
                     .select('-_v -password')
                     .populate('books');
-
                 return userData;    
             }
-
             throw new AuthenticationError("Not logged in");
         },
-        // books: async (parent, { username }) => {
-        //     const params = username ? { username } : {};
-        //     return Book.find(params);
-        // },
-        // book: async (parent, { _id }) => {
-        //     return Book.findOne({ _id });
-        // }
     },
 
     Mutation: {
@@ -49,23 +40,23 @@ const resolvers = {
         saveBook: async(parent,{ user, bookData }, context) => {
             console.log(user);
             if (context.user) {
-              
-                return User.findByIdAndUpdate(
+                const updatedUser = await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $addToSet: { savedBooks: bookData }},
                     { new: true }
                 );
-                            } 
+                return updatedUser;
+            } 
             throw new AuthenticationError("Please log in");
         },
         removeBook: async(parent, bookId, context) => {
             if (context.user) {
-                
-                return User.findByIdAndUpdate(
+               const updatedUser = await User.findByIdAndUpdate(
                     { _id: context.user._id},
                     { $pull: { savedBooks: {bookData: context.bookId }}},
                     { new: true }
                 );
+                return updatedUser;
             }
             throw new AuthenticationError("Please log in.");
         }

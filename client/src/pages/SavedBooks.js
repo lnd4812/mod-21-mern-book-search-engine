@@ -1,60 +1,48 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
-import { Redirect, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
 import Auth from '../utils/auth';
-import { removeBookId } from '../utils/localStorage';
-
+import { removeBookId, saveBookIds } from '../utils/localStorage';
 
 const SavedBooks = () => {
-  const [userData, setUserData] = useState([]);
-  const userDataLength = Object.keys(userData).length;
-
-  const { userData: userParam } = useParams(); 
-  const { loading, data } = useQuery(GET_ME, {
-      variables: { userData: userParam },
-      });
-
-    const user = data?.me || data?.user || {};
-    setUserData(user);
-
-   
-    // create function that accepts the book's mongo _id value as param and deletes the book from the database
-   const removeBook  = useMutation(REMOVE_BOOK, {
-    update(cache, { data: {removeBook}} ) {
-      try {
-        const { me } = cache.readQuery({ query: GET_ME });
-        cache.writeQuery({
-          query: GET_ME,
-          data: { me: { ...me, bookData: [...me.bookData, removeBook]}},
-        });
-      }
-      catch(e) {
-        console.error(e); 
-      }
-    }, 
-  });  
-
-    try {
-      if (Auth.loggedIn () && Auth.getToken().data.userData === userParam) {
-        return <Redirect to="/saved" />;
-      }
-    
-      if (!user?.userData) {
-        throw new Error('Please log in to view this information.  Use navigation links at the top of the page to sign up or log in');      
-      }
-    }
-    catch (err) {
-      console.error(err);
-    } 
-  // if data isn't here yet, say so
-    if (!userDataLength || loading ) {
-      return <h2>LOADING...</h2>;
-    }
   
+  const { loading, data } = useQuery(GET_ME); 
+    
+    const userData = data?.me || data?.user || {};
+      
+    // create function that accepts the book's mongo _id value as param and deletes the book from the database
+    const [removeBook]  = useMutation(REMOVE_BOOK);
+    const handleDeleteBook = async(bookId) => {
+      const token = Auth.loggedIn() ? Auth.getToken() : null;
 
+      if (!token) {
+        return false;
+      }
+
+      try {
+        await removeBook({
+          variables: { bookId },
+        });
+
+        // remove from saved books page, then remove from local storage to complete deletion
+        removeBookId(bookId);
+
+      } catch (err) {
+          console.error(err);
+      } 
+    };
+    
+    // if data isn't here yet, say so
+      if (loading ) {
+        return <h2>LOADING...</h2>;
+    }
+
+    // update saved books in local storage with userData saved books
+    const savedBookIds = userData.bookData.map((book) => book.bookId);
+    saveBookIds(savedBookIds);
+  
   return (
     <>
       <Jumbotron fluid className='text-light bg-dark'>
@@ -77,7 +65,7 @@ const SavedBooks = () => {
                   <Card.Title>{book.title}</Card.Title>
                   <p className='small'>Authors: {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
-                  <Button className='btn-block btn-danger' onClick={() => removeBookId(book.bookId)}>
+                  <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
                     Delete this Book!
                   </Button>
                 </Card.Body>
