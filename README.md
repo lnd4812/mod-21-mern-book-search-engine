@@ -47,7 +47,7 @@ Please visit [Contributor Covenant website](https://contributor-covenant.org) fo
 
 ## Testing
 
-Apollo explorer sandbox [Apollo GraphQL](https://studio.apollographql.com/sandbox/explorer) was used to test the back-end, while the continuous rendering of React as changes are made to the code does enables the developer to measure the impact of each change in the code (unless there is an uncaught reference error where process is not defined due to some iframe element)
+Apollo explorer sandbox [Apollo GraphQL](https://studio.apollographql.com/sandbox/explorer) was used to test the back-end, while the continuous rendering of React as changes are made to the code does enables the developer to measure the impact of each change in the code.
 
 ## Credits
 
