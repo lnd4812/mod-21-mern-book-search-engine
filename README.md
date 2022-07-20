@@ -51,7 +51,7 @@ Apollo explorer sandbox [Apollo GraphQL](https://studio.apollographql.com/sandbo
 
 ## Credits
 
-Assistance was provided in my weekly tutoring session, askBCS and the usual visits to the Stack Overflow website [https://stackoverflow.com](https://stackoverflow.com), GitHub, React.JS examples and several miscellaneous Google searches.
+Assistance was provided in my weekly tutoring session, askBCS, Module-21 lession files and lots of Googling including the usual visits to the Stack Overflow website [https://stackoverflow.com](https://stackoverflow.com), GitHub [https://Github.com](https://Github.com), React.JS examples and several other Google searches.
 
 ## Questions?
 

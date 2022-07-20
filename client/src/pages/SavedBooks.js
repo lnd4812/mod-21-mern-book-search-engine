@@ -4,13 +4,13 @@ import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
 import Auth from '../utils/auth';
-import { removeBookId, saveBookIds } from '../utils/localStorage';
+import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
   
   const { loading, data } = useQuery(GET_ME); 
-    
-    const userData = data?.me || data?.user || {};
+  const userData = data?.me || data?.user || {};
+
       
     // create function that accepts the book's mongo _id value as param and deletes the book from the database
     const [removeBook]  = useMutation(REMOVE_BOOK);
@@ -39,11 +39,7 @@ const SavedBooks = () => {
       if (loading ) {
         return <h2>LOADING...</h2>;
     }
-
-    // update saved books in local storage with userData saved books
-    const savedBookIds = userData.save.map((book) => book.bookId);
-    saveBookIds(savedBookIds);
-  
+     
   return (
     <>
       <Jumbotron fluid className='text-light bg-dark'>
