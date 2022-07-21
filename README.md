@@ -26,26 +26,35 @@ A sample display of expected output is included in the Challenge outline.
 
 Installation involves the implementation of several npm packages & dependencies, the main ones of which are:
 
-* Server - launch on localhost:3001
-  * Apollo Server (apollo-server-express npm package) to use GraphQL queries and mutuations to fetch and modify data / use graphql package to parse GraphQL syntax in front end & back end
-  * JSON Web Tokens - jsonwebtoken package as an alternative to using web-cookies, in conjunction with the jwt-decode npm which decodes the JSON Web Tokens.
-  * Nodemon package for running and testing the back-end; it automatically restarts the server whenever a change is made in the code
-  * Modify existing Middleware to function with GraphQL API
-  * Context
-  * add "scripts" to package.json
-* Client - launch on localhost:3000
-  * React - downgraded to version 17
-  * React Router - navigational components that work with the   react-router-dom npm package to enable SPA's to behave more like multi-page applications.
-* Concurrently - to run both GraphQL back-end and React front-end "concurrently" in the same terminal.
-* develop & pre-install npm packages, along with build
-* Create an Apollo Provider (apollo client) to enable requests to communicate with an Apollo Server
-* Deploy application to Heroku
+**Server Directory** - launched on localhost:3001 in development
+
+* Apollo Server _apollo-server-express_ npm package - install and integrate to use GraphQL queries and mutuations to fetch and modify data / use _graphql_ package to parse GraphQL syntax in front end & back end.
+* JSON Web Tokens - Middleware used for authentication of user credentials; _jsonwebtoken_ package as an alternative to using web-cookies, in conjunction with the _jwt-decode_ npm on the client side with Apollo Client's _setContext_ function to decode the JSON Web Tokens.
+* Nodemon package for running and testing the back-end using _npm run watch_ in terminal command line; it automatically restarts the server whenever a change is made in the code and also alerts you to errors.
+  
+**Client Directory** - launched on localhost:3000 in development
+
+* React - to install, first run npx create-react-app client, remove node-modules and package-lock.json, downgrade react and react-dom to v 17.0.2 for better compatibility, and then run npm install.
+* Apollo Client Side Library - install Apollo Client _(@apollo/client)_ as dependency to connect to GraphQL server, along with the _graphql_ dependency for correct GraphQL syntax. An advantage of the apollo/client library is the Hooks that integrate with React for functionality.
+* React Router - _npm install react-router-dom_ to enable navigational components that render an SPA to behave more like a multi-page applications
+
+**Root Directory** - install _Concurrently_ package to enable the GraphQL back-end and React front-end to run "concurrently" in the same terminal.  Update _scripts_ in package.json file as seen in package.json file in application's root directory; The __npm run develop_ command will start the server for both server and client side.
 
 ## Usage
 
-This application is meant to serve as a book search engine for a Google Books API. A user can enter the name of a book in the input field to conduct a search.  Results include the book's title, author, description, image and link to that book on the Google Books site.  However, the user must be logged in to save a book or delete a book.  The application features a modal giving a user the option to login; if not yet signed up, the user may click on the signup tab in order to create and account.
+This application is meant to serve as a book search engine for a Google Books API. A user can enter the name of a book in the input field to conduct a search.  Results include the book's title, author, description, image and link to that book on the Google Books site.  However, the user must be logged in to save a book or delete a book.  
+
+![LogIn / Signup Modal](images/login-signup-modal.png)
+
+The application features a modal giving a user the option to login; if not yet signed up, the user may click on the signup tab in order to create and account.
+
+![Search Page when not logged in](images/main-page-with-menu-options-when-not-signed-in.png)
 
 Once logged in, menu options available to the user now include options to visit that user's saved books in addition to being able to save or delete a book. The login/signup menu option changes to logout.
+
+![logged in](images/logged-in-on-heroku-deployment.png)
+
+![saved books](images/user-saved-page-with-book.png)
 
 ## License
 
@@ -61,7 +70,7 @@ Apollo explorer sandbox [Apollo GraphQL](https://studio.apollographql.com/sandbo
 
 ## Credits
 
-Assistance was provided in my weekly tutoring session, askBCS, Module-21 lession files and lots of Googling including the usual visits to the Stack Overflow website [https://stackoverflow.com](https://stackoverflow.com), GitHub [https://Github.com](https://Github.com), React.JS examples and several other Google searches too numerous to name.
+Assistance was provided in my weekly tutoring sessions, askBCS sessions, Module-21 lession files and lots of Googling, including the usual visits to the Stack Overflow website [https://stackoverflow.com](https://stackoverflow.com), GitHub [https://Github.com](https://Github.com), React.JS examples and several other Google searches too numerous to name.
 
 ## Questions?
 
