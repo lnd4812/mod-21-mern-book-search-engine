@@ -9,8 +9,7 @@ import { removeBookId } from '../utils/localStorage';
 const SavedBooks = () => {
   
   const { loading, data } = useQuery(GET_ME); 
-  const userData = data?.me || data?.user || {};
-
+  const userData = data?.me || {};
       
     // create function that accepts the book's mongo _id value as param and deletes the book from the database
     const [removeBook]  = useMutation(REMOVE_BOOK);
@@ -39,7 +38,7 @@ const SavedBooks = () => {
       if (loading ) {
         return <h2>LOADING...</h2>;
     }
-     
+      
   return (
     <>
       <Jumbotron fluid className='text-light bg-dark'>
