@@ -11,7 +11,7 @@ Output is based on the acceptance criteria outlined in the Module 20 Assignment 
 
 A sample display of expected output is included in the Challenge outline.
 
-![example](21-mern-homework-demo-01.gif)
+![example](images/21-mern-homework-demo-01.gif)
 
 ## Table of Contents
 
@@ -38,7 +38,9 @@ Installation involves the implementation of several npm packages & dependencies,
 * Apollo Client Side Library - install Apollo Client _(@apollo/client)_ as dependency to connect to GraphQL server, along with the _graphql_ dependency for correct GraphQL syntax. An advantage of the apollo/client library is the Hooks that integrate with React for functionality.
 * React Router - _npm install react-router-dom_ to enable navigational components that render an SPA to behave more like a multi-page applications
 
-**Root Directory** - install _Concurrently_ package to enable the GraphQL back-end and React front-end to run "concurrently" in the same terminal.  Update _scripts_ in package.json file as seen in package.json file in application's root directory; The __npm run develop_ command will start the server for both server and client side.
+**Root Directory** - to integrate back-end and front-end.
+
+* install _Concurrently_ package to enable the GraphQL back-end and React front-end to run "concurrently" in the same terminal.  Update _scripts_ in package.json file as seen in package.json file in application's root directory; The __npm run develop_ command will start the server for both server and client side.
 
 ## Usage
 
