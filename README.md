@@ -31,6 +31,7 @@ Installation involves the implementation of several npm packages & dependencies,
 * Apollo Server _apollo-server-express_ npm package - install and integrate to use GraphQL queries and mutuations to fetch and modify data / use _graphql_ package to parse GraphQL syntax in front end & back end.
 * JSON Web Tokens - Middleware used for authentication of user credentials; _jsonwebtoken_ package as an alternative to using web-cookies, in conjunction with the _jwt-decode_ npm on the client side with Apollo Client's _setContext_ function to decode the JSON Web Tokens.
 * Nodemon package for running and testing the back-end using _npm run watch_ in terminal command line; it automatically restarts the server whenever a change is made in the code and also alerts you to errors.
+* _Cors_ - installed to address "cross-origin" issues when trying to login.  Works better on Firefox than Chrome, where one must also remember to clear cache.
   
 **Client Directory** - launched on localhost:3000 in development
 
