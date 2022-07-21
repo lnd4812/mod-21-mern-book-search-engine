@@ -24,12 +24,22 @@ A sample display of expected output is included in the Challenge outline.
 
 ## Installation
 
-* Set up Apollo Server to use GraphQL queries and mutuations to fetch and modify data
-* Modify existing Middleware to function with GraphQL API
-* Create an Apollo Provider to enable requests to communicate with an Apollo Server
-* Deploy application to Heroku
+Installation involves the implementation of several npm packages & dependencies, the main ones of which are:
 
-The React App is initiated by running "npm create-react-app"in the CLI and, once the sufficient coding has been added, may be deployed by typing "npm run start" in the CLI.  A webpage is then launched at "localhost:3000".
+* Server - launch on localhost:3001
+  * Apollo Server (apollo-server-express npm package) to use GraphQL queries and mutuations to fetch and modify data / use graphql package to parse GraphQL syntax in front end & back end
+  * JSON Web Tokens - jsonwebtoken package as an alternative to using web-cookies, in conjunction with the jwt-decode npm which decodes the JSON Web Tokens.
+  * Nodemon package for running and testing the back-end; it automatically restarts the server whenever a change is made in the code
+  * Modify existing Middleware to function with GraphQL API
+  * Context
+  * add "scripts" to package.json
+* Client - launch on localhost:3000
+  * React - downgraded to version 17
+  * React Router - navigational components that work with the   react-router-dom npm package to enable SPA's to behave more like multi-page applications.
+* Concurrently - to run both GraphQL back-end and React front-end "concurrently" in the same terminal.
+* develop & pre-install npm packages, along with build
+* Create an Apollo Provider (apollo client) to enable requests to communicate with an Apollo Server
+* Deploy application to Heroku
 
 ## Usage
 
@@ -51,7 +61,7 @@ Apollo explorer sandbox [Apollo GraphQL](https://studio.apollographql.com/sandbo
 
 ## Credits
 
-Assistance was provided in my weekly tutoring session, askBCS, Module-21 lession files and lots of Googling including the usual visits to the Stack Overflow website [https://stackoverflow.com](https://stackoverflow.com), GitHub [https://Github.com](https://Github.com), React.JS examples and several other Google searches.
+Assistance was provided in my weekly tutoring session, askBCS, Module-21 lession files and lots of Googling including the usual visits to the Stack Overflow website [https://stackoverflow.com](https://stackoverflow.com), GitHub [https://Github.com](https://Github.com), React.JS examples and several other Google searches too numerous to name.
 
 ## Questions?
 
